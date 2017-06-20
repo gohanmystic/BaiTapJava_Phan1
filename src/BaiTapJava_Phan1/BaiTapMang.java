@@ -1,5 +1,6 @@
 package BaiTapJava_Phan1;
 
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,18 +33,18 @@ public class BaiTapMang {
 	}
 	public String TaoHoTen () {
 		
-		String [] ho 	= {"Tran", "Le", "Nguyen", "Phan"};
-		String [] hodem = {"Quoc", "Van", "Thi", "Dinh"};
-		String [] ten 	= {"Vu", "Luyen", "Nam", "Phung"};
+		String [] ho 	= {"Tran", "Le", "Nguyen", "Phan", "Trinh", "Hoang"};
+		String [] hodem = {"Quoc", "Van", "Thi", "Dinh", "Xuan", "Minh"};
+		String [] ten 	= {"Vu", "Luyen", "Nam", "Phung", "Loc", "Binh"};
 		
 		int ddho 	= ho.length;
 		int ddhodem = hodem.length;
 		int ddten 	= ten.length;
 		Random r = new Random();
 		
-		String RandomHo = ho[r.nextInt(ddho - 1)];
-		String RandomHoDem = hodem[r.nextInt(ddhodem - 1)];
-		String RandomTen = ten[r.nextInt(ddten - 1)];
+		String RandomHo = ho[r.nextInt(ddho)];
+		String RandomHoDem = hodem[r.nextInt(ddhodem)];
+		String RandomTen = ten[r.nextInt(ddten)];
 		
 		return RandomHo + " " + RandomHoDem + " " + RandomTen;
 	}
@@ -61,7 +62,7 @@ public class BaiTapMang {
 		int ddgt		= gioitinh.length;
 		Random r 			= new Random();
 		
-		return gioitinh[r.nextInt(ddgt - 1)];
+		return gioitinh[r.nextInt(ddgt)];
 	}
 	public Double TaoDTB () {
 		Random r = new Random();		
@@ -76,19 +77,27 @@ public class BaiTapMang {
 		return "Kem";
 	}
 	public void HienThi (int n) {
-		
-		
-		for (int i = 0; i < n; i++) {
-			
+		for (int i = 0; i < n; i++) {			
 			String rname 	= TaoHoTen();
 			String rgt		= TaoGioiTinh(rname);
 			String rdate	= CreateRandomDate("01/01/1990", "31/12/2000");		
-			Double rDTB 		= TaoDTB();
+			Double rDTB 	= TaoDTB();
 			String xeploai	= XepLoai(rDTB);
 			String ketqua 	= "";
 			ketqua = (rDTB >= 5) ? "Dau" : "Rot";
 			
 			System.out.println(rname+";"+rgt+";"+rdate+";"+rDTB+";"+xeploai+";"+ketqua);
 		}
+	}
+	public void GhiFile (PrintWriter pw) {
+		String rname 	= TaoHoTen();
+		String rgt		= TaoGioiTinh(rname);
+		String rdate	= CreateRandomDate("01/01/1990", "31/12/2000");		
+		Double rDTB 	= TaoDTB();
+		String xeploai	= XepLoai(rDTB);
+		String ketqua 	= "";
+		ketqua = (rDTB >= 5) ? "Dau" : "Rot";
+		
+		pw.println(rname+";"+rgt+";"+rdate+";"+rDTB+";"+xeploai+";"+ketqua);
 	}
 }
