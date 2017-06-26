@@ -128,10 +128,10 @@ public class BaiTapFile {
 				Date date = format.parse(d);
 				String dcheck = "00:00:00 " + d; // chuan hoa chuoi ngay theo return cua ham toLocaleString
 				
+				System.out.println(date.toLocaleString());
 				if (dcheck.compareTo(date.toLocaleString()) != 0){  //toLocaleString tra ve ngay dang 00:00:00 dd-MM-yyyy
 					System.out.println(ds[0] + " : " + " dinh dang ngay sinh khong hop le! (" + ds[3] + ")");
 				}
-				
 				double dtb = Double.parseDouble(ds[4]);
 				
 				if (dtb < 0 || dtb > 10) {
