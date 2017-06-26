@@ -62,17 +62,12 @@ public class XuLiFile {
 	Double LamTronOto(Double gio) {
 		if (gio % 0.5 == 0) {
 			return gio;
-		} else if (gio - 0.5 > (double) gio.intValue()) { // vi du: gio = 2.6
-															// thi 2.6 - 0.5 =
-															// 2.1 > (int)gio =
-															// 2.........
-			return (double) gio.intValue() + 1; // tra ve (int) gio + 1 => 2.6
-												// thi tra ve 3
+//			vi du: gio = 2.6 thi 2.6 - 0.5 = 2.1 > (int)gio = 2 thi tra ve 3
+		} else if (gio - 0.5 > (double) gio.intValue()) { 
+			return (double) gio.intValue() + 1; // tra ve (int) gio + 1 => 2.6		 
 		} else
-			return (double) gio.intValue() + 0.5; // nguoc lai, vi du gio = 2.4
-													// thi 2.4 - 0.5 < = 1.9 <
-													// (int)gio = 2
-													// => return ve (int)gio = 2
+			return (double) gio.intValue() + 0.5; 
+//		nguoc lai, vi du gio = 2.4 thi 2.4 - 0.5 < = 1.9 <	(int)gio = 2 => return ve (int)gio = 2							// 
 	}
 
 	Double LamTronXeMay(Double ngay) {
