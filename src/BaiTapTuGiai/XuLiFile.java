@@ -15,57 +15,50 @@ import java.util.Date;
 
 public class XuLiFile {
 
-	public static ArrayList<String> ThoiGianRa = new ArrayList<String>();
-	public static ArrayList<String> TinhTrangLucRa = new ArrayList<String>();
-
-	public void DocFileInput2() {
-		try {
-			FileInputStream fis = new FileInputStream("input2.txt");
-			InputStreamReader isr = new InputStreamReader(fis);
-			BufferedReader brInput2 = new BufferedReader(isr);
-			while (true) {
-				String st = brInput2.readLine();
-				if (st == "" || st == null)
-					break;
-				String[] ds = st.split("[;]");
-
-				ThoiGianRa.add(ds[3]);
-				TinhTrangLucRa.add(ds[4]);
-			}
-			brInput2.close();
-		} catch (Exception e) {
-			System.out.println("Error" + e.getMessage());
-		}
-	}
-
 	public void GhiFileOutput1() {
-		int i = 0;
-
 		try {
-			while (true) {
-				// doc file input1
-				FileInputStream fis = new FileInputStream("input1.txt");
-				InputStreamReader isr = new InputStreamReader(fis);
-				BufferedReader brInput1 = new BufferedReader(isr);
-				// ghi du lieu vao file output1
-				FileOutputStream fos = new FileOutputStream("output3.txt");
-				OutputStreamWriter ow = new OutputStreamWriter(fos);
-				PrintWriter pwOutput1 = new PrintWriter(fos);
-				String st = brInput1.readLine();
+			// doc file input1
+			FileInputStream fis = new FileInputStream("input1.txt");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader brInput1 = new BufferedReader(isr);
 
-				if (st == "" || st == null)
+			// ghi du lieu vao file output1
+			FileOutputStream FOS = new FileOutputStream("output1.txt");
+			OutputStreamWriter OSW = new OutputStreamWriter(FOS);
+			PrintWriter PWOutput1 = new PrintWriter(OSW);
+			while (true) {
+				String st1 = brInput1.readLine();
+				if (st1 == "" || st1 == null)
 					break;
-				String[] ds = st.split("[;]");
-				
-				pwOutput1.println(ds[1]);
-				i++;
+				String[] ds1 = st1.split("[;]");
+				PWOutput1.print((ds1[0] + ";" + ds1[1] + ";" + ds1[2] + ";" + ds1[3]));
+				// doc file input2
+				FileInputStream fis2 = new FileInputStream("input2.txt");
+				InputStreamReader isr2 = new InputStreamReader(fis2);
+				BufferedReader brInput2 = new BufferedReader(isr2);
+				while (true) {
+					String st2 = brInput2.readLine();
+					if (st2 == "" || st2 == null)
+						break;
+					String[] ds2 = st2.split("[;]");
+					if (!CheckTrangThai(ds1[1]) && (ds1[1].equalsIgnoreCase(ds2[1]))) {
+						PWOutput1.println(";" + ds2[3] + ";" + ds2[4]);
+					} else if (CheckTrangThai(ds1[1]) && ds1[2].equalsIgnoreCase(ds2[2])) {
+						PWOutput1.println(";" + ds2[3] + ";" + ds2[4]);
+					}
+				}
+				brInput2.close();
 			}
+			brInput1.close();
+			PWOutput1.close();
 		} catch (Exception e) {
 			System.out.println(e);
 
 		}
 	}
 
+	// t =3.1
+	// Math.ceil (t) -> 4
 	Double LamTronOto(Double gio) {
 		if (gio % 0.5 == 0) {
 			return gio;

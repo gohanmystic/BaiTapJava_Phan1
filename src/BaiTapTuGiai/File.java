@@ -13,18 +13,11 @@ import java.nio.Buffer;
 public class File {
 
 	public static void main(String[] args) {
-		
-		
-		
-//		XuLiFile xulifile = new XuLiFile();
-//		xulifile.DocFileInput2();
-//		xulifile.GhiFileOutput1();
-//		xulifile.GhiFileOutput();
-		
+
 		XuLiFile file2 = new XuLiFile();
-		file2.DocFileInput2();
 		file2.GhiFileOutput1();
-		
+		file2.GhiFileOutput();
+
 	}
 
 }
