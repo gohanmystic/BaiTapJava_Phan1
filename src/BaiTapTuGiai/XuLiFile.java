@@ -28,7 +28,7 @@ public class XuLiFile {
 			PrintWriter PWOutput1 = new PrintWriter(OSW);
 			while (true) {
 				String st1 = brInput1.readLine();
-				if (st1 == "" || st1 == null)
+				if (st1 == "" || st1 == null || st1.isEmpty())
 					break;
 				String[] ds1 = st1.split("[;]");
 				PWOutput1.print((ds1[0] + ";" + ds1[1] + ";" + ds1[2] + ";" + ds1[3]));
@@ -38,7 +38,7 @@ public class XuLiFile {
 				BufferedReader brInput2 = new BufferedReader(isr2);
 				while (true) {
 					String st2 = brInput2.readLine();
-					if (st2 == "" || st2 == null)
+					if (st2 == "" || st2 == null || st2.isEmpty())
 						break;
 					String[] ds2 = st2.split("[;]");
 					if (!CheckTrangThai(ds1[1]) && (ds1[1].equalsIgnoreCase(ds2[1]))) {
