@@ -17,22 +17,25 @@ public class XuLiFile {
 
 	public void GhiFileOutput1() {
 		try {
-			// doc file input1
+			// 3 dòng khai báo để đọc file input1.txt, biến brInput1 ở dòng cuối để đọc dữ liệu trong file
 			FileInputStream fis = new FileInputStream("input1.txt");
 			InputStreamReader isr = new InputStreamReader(fis);
 			BufferedReader brInput1 = new BufferedReader(isr);
 
-			// ghi du lieu vao file output1
+			// 3 dòng khai báo để ghi dữ liệu vào file output1.txt, biến PWOutput1 ở dòng cuối để ghi dữ liệu
 			FileOutputStream FOS = new FileOutputStream("output1.txt");
 			OutputStreamWriter OSW = new OutputStreamWriter(FOS);
 			PrintWriter PWOutput1 = new PrintWriter(OSW);
-			while (true) {
-				String st1 = brInput1.readLine();
-				if (st1 == "" || st1 == null || st1.isEmpty())
+			while (true) {  // vòng lặp vô hạn để đọc file, đọc đến khi cuối file thì break
+				String st1 = brInput1.readLine(); // brInput1.readLine: đọc dữ liệu từng dòng trong file lưu vào biến st1
+				if (st1 == "" || st1 == null || st1.isEmpty()) //cuối file <=> st1 = "" hoặc st1=null hoặc st1.isEmpty
 					break;
-				String[] ds1 = st1.split("[;]");
-				PWOutput1.print((ds1[0] + ";" + ds1[1] + ";" + ds1[2] + ";" + ds1[3]));
-				// doc file input2
+				String[] ds1 = st1.split("[;]");  //cắt dữ liệu st1 phân cách nhau bởi dấu ; cho vào mảng ds1
+				//ví dụ st1 chưa '4;37A-365.12;Not Available;11:30 07/11/2015;Binh thuong'
+				//thì ds1[0]=4; ds1[1]=37A-365.12; ds1[2]=Not Available; ds1[3]=11:30 07/11/2015; ds1[4]=Binh thuong
+				
+				PWOutput1.print((ds1[0] + ";" + ds1[1] + ";" + ds1[2] + ";" + ds1[3])); //ghi dữ liệu vào file Output1
+				// khai báo để đọc file input2.txt
 				FileInputStream fis2 = new FileInputStream("input2.txt");
 				InputStreamReader isr2 = new InputStreamReader(fis2);
 				BufferedReader brInput2 = new BufferedReader(isr2);
@@ -40,17 +43,19 @@ public class XuLiFile {
 					String st2 = brInput2.readLine();
 					if (st2 == "" || st2 == null || st2.isEmpty())
 						break;
-					String[] ds2 = st2.split("[;]");
-					if (!CheckTrangThai(ds1[1]) && (ds1[1].equalsIgnoreCase(ds2[1]))) {
+					String[] ds2 = st2.split("[;]"); // cắt dữ liệu cho vào mảng ds2
+					// đọc hàm CheckTrangTHai ở phía dưới, hàm trả về true nếu ds[1] = "available", ngc lại trả về false
+					// và kiểm tra nếu ds[1] == ds2[1] thì in vào file Output1
+					if (!CheckTrangThai(ds1[1]) && (ds1[1].equalsIgnoreCase(ds2[1]))) { 
 						PWOutput1.println(";" + ds2[3] + ";" + ds2[4]);
 					} else if (CheckTrangThai(ds1[1]) && ds1[2].equalsIgnoreCase(ds2[2])) {
 						PWOutput1.println(";" + ds2[3] + ";" + ds2[4]);
 					}
 				}
-				brInput2.close();
+				brInput2.close(); // đóng file input2.txt
 			}
-			brInput1.close();
-			PWOutput1.close();
+			brInput1.close(); //đóng file input2.txt
+			PWOutput1.close();//đòng file output1.txt
 		} catch (Exception e) {
 			System.out.println(e);
 
